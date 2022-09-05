@@ -116,12 +116,5 @@ app.get('/manage',isLoggedIn,function(req, res){
    res.sendFile(path.join(__dirname,'build', 'index.html'))
 });
 
-
-
-
-var server = app.listen(8081, function () {
-   var host = server.address().address
-   var port = server.address().port
-   
-   console.log("Example app listening at 8081", host, port)
-})
+app.listen(process.env.PORT || 8081)
+module.exports = app
