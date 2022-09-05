@@ -82,7 +82,7 @@ const isLoggedIn = (req, res, next) => {
    } else {
       if(authTokens.includes(authToken)) {
          console.log('true')
-         res.sendFile(path.join(__dirname,'build', 'index.html'))
+         res.sendFile(path.join(__dirname,'manage', 'index.html'))
          next()
       }
      // return unauthorized
@@ -105,7 +105,7 @@ app.get('/',function(req, res){
       res.redirect('/manage')
    });
 app.use(express.static(path.join(__dirname,'login')));
-app.use(express.static(path.join(__dirname,'build'),{
+app.use(express.static(path.join(__dirname,'manage'),{
    setHeaders: function (res, path, stat) {
      res.set('Set-Cookie',`authToken=${cookieHandler("get")};Expires=${new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59).toUTCString()}Path=/`)
    }}))
@@ -113,7 +113,7 @@ app.use(express.static(path.join(__dirname,'build'),{
 
 
 app.get('/manage',isLoggedIn,function(req, res){
-   res.sendFile(path.join(__dirname,'build', 'index.html'))
+   res.sendFile(path.join(__dirname,'manage', 'index.html'))
 });
 
 app.listen(process.env.PORT || 8081)
